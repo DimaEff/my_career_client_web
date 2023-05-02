@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { getRoutes } from '@/app/routing'
 
-import './index.css'
+import 'normalize.css'
 
 const router = createBrowserRouter(getRoutes())
 
