@@ -1,7 +1,4 @@
-export interface ApiResponse<T> {
-  payload: T | null
-  errorMessage: string | null
-}
+import { type ApiResponse } from '@/shared/api/models'
 
 export type FetchFunc = <T>(...args: unknown[]) => Promise<ApiResponse<T> | null>
 

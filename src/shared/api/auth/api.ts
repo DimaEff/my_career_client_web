@@ -1,20 +1,20 @@
 import { get, post } from 'axios'
 
+import { getBase, withErrorHandling } from '@/shared/api/lib'
 import {
-  type AuthUser,
+  type ApiResponse,
+  type AuthUserDto,
   type ConfirmationStatus,
   type CreateUserDto,
-  type SendConfirmationRes,
-} from '@/shared/api/auth/models'
-import { getBase, withErrorHandling } from '@/shared/api/lib'
-import { type ApiResponse } from '@/shared/api/models'
+  type SendConfirmationDto,
+} from '@/shared/api/models'
 
 const AUTH_BASE = getBase('auth')
 const LOGIN_BASE = getBase('login')
 const REGISTER_BASE = getBase('register')
 
 export const sendPhoneConfirmationCode = withErrorHandling(
-  async (phoneNumber: string): Promise<ApiResponse<SendConfirmationRes>> =>
+  async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (
       await get(AUTH_BASE, {
         params: { phoneNumber },
@@ -23,7 +23,7 @@ export const sendPhoneConfirmationCode = withErrorHandling(
 )
 
 export const loginByPhoneNumber = withErrorHandling(
-  async (phoneNumber: string, code: string): Promise<ApiResponse<AuthUser>> =>
+  async (phoneNumber: string, code: string): Promise<ApiResponse<AuthUserDto>> =>
     (
       await get(LOGIN_BASE, {
         params: {
@@ -35,7 +35,7 @@ export const loginByPhoneNumber = withErrorHandling(
 )
 
 export const loginIntoCompany = withErrorHandling(
-  async (userId: string, companyId: string): Promise<ApiResponse<AuthUser>> =>
+  async (userId: string, companyId: string): Promise<ApiResponse<AuthUserDto>> =>
     (await get(LOGIN_BASE + `company/${companyId}`, { params: { userId } })).data,
 )
 
@@ -52,6 +52,6 @@ export const checkPhoneNumber = withErrorHandling(
 )
 
 export const register = withErrorHandling(
-  async (dto: CreateUserDto): Promise<ApiResponse<AuthUser>> =>
+  async (dto: CreateUserDto): Promise<ApiResponse<AuthUserDto>> =>
     (await post(REGISTER_BASE, dto)).data,
 )
