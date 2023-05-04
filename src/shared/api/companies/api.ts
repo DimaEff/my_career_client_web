@@ -6,6 +6,7 @@ import {
   type CompanyDto,
   type CreateCompanyDto,
   type Id,
+  type UserDto,
 } from '@/shared/api/models'
 
 const BASE_URL = getBase('companies')
@@ -32,4 +33,6 @@ export const addUserToCompany = withErrorHandling(
     ).data,
 )
 
-export const getCompanyUsers = withErrorHandling(async () => (await get(BASE_URL + 'users')).data)
+export const getCompanyUsers = withErrorHandling(
+  async (): Promise<ApiResponse<UserDto[]>> => (await get(BASE_URL + 'users')).data,
+)

@@ -1,0 +1,8 @@
+export const enum CommonRoleTitle {
+  OWNER = 'OWNER',
+  MASTER = 'MASTER',
+  MECHANIC = 'MECHANIC',
+  MANAGER = 'MANAGER',
+  DISPATCHER = 'DISPATCHER',
+  ACCOUNTANT = 'ACCOUNTANT',
+}
