@@ -1,6 +1,7 @@
 import { get, post } from 'axios'
+import { createEffect } from 'effector'
 
-import { getBase, withErrorHandling } from '@/shared/api/lib'
+import { getBase } from '@/shared/api/lib'
 import {
   type ApiResponse,
   type CreateRoleDto,
@@ -12,20 +13,20 @@ import {
 
 export const BASE_URL = getBase('roles')
 
-export const getUserRoles = withErrorHandling(
+export const getUserRolesFx = createEffect(
   async (): Promise<ApiResponse<RoleDto[]>> => (await get(BASE_URL)).data,
 )
 
-export const getCompanyRoles = withErrorHandling(
+export const getCompanyRolesFx = createEffect(
   async (companyId: Id): Promise<ApiResponse<RoleDto[]>> =>
     (await get(BASE_URL + `${companyId}`)).data,
 )
 
-export const createRole = withErrorHandling(
+export const createRoleFx = createEffect(
   async (dto: CreateRoleDto): Promise<ApiResponse<RoleDto>> => (await post(BASE_URL, dto)).data,
 )
 
-export const addRoleToUser = withErrorHandling(
+export const addRoleToUserFx = createEffect(
   async (userId: Id, roleId: Id): Promise<ApiResponse<string>> =>
     (
       await get(BASE_URL + 'add_to_user', {
@@ -37,19 +38,19 @@ export const addRoleToUser = withErrorHandling(
     ).data,
 )
 
-export const getRolePermissions = withErrorHandling(
+export const getRolePermissionsFx = createEffect(
   async (roleId: Id): Promise<ApiResponse<PermissionDto>> => {
     return (await get(BASE_URL + `/${roleId}/permissions`)).data
   },
 )
 
-export const addPermissionToRole = withErrorHandling(
+export const addPermissionToRoleFx = createEffect(
   async (dto: UpdateRolePermissionsDto): Promise<ApiResponse<string>> => {
     return (await post(BASE_URL + 'permissions/add', dto)).data
   },
 )
 
-export const removePermissionFromRole = withErrorHandling(
+export const removePermissionFromRoleFx = createEffect(
   async (dto: UpdateRolePermissionsDto): Promise<ApiResponse<string>> =>
     (await post(BASE_URL + '/permissions/remove', dto)).data,
 )

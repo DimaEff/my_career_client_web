@@ -1,6 +1,7 @@
 import { get, post } from 'axios'
+import { createEffect } from 'effector'
 
-import { getBase, withErrorHandling } from '@/shared/api/lib'
+import { getBase } from '@/shared/api/lib'
 import {
   type ApiResponse,
   type CompanyDto,
@@ -11,17 +12,17 @@ import {
 
 const BASE_URL = getBase('companies')
 
-export const getUserCompanies = withErrorHandling(
+export const getUserCompaniesFx = createEffect(
   async (userId: Id): Promise<ApiResponse<CompanyDto[]>> =>
     (await get(BASE_URL, { params: { userId } })).data,
 )
 
-export const createCompany = withErrorHandling(
+export const createCompanyFx = createEffect(
   async (dto: CreateCompanyDto, userId: Id): Promise<ApiResponse<CompanyDto>> =>
     (await post(BASE_URL, dto, { params: { userId } })).data,
 )
 
-export const addUserToCompany = withErrorHandling(
+export const addUserToCompanyFx = createEffect(
   async (phoneNumber: string, roleId: Id): Promise<ApiResponse<string>> =>
     (
       await get(BASE_URL + 'add_user', {
@@ -33,6 +34,6 @@ export const addUserToCompany = withErrorHandling(
     ).data,
 )
 
-export const getCompanyUsers = withErrorHandling(
+export const getCompanyUsersFx = createEffect(
   async (): Promise<ApiResponse<UserDto[]>> => (await get(BASE_URL + 'users')).data,
 )

@@ -12,6 +12,9 @@
   "dependencies": {
     "@types/react-router": "^5.1.20",
     "axios": "^1.4.0",
+    "effector": "^22.8.3",
+    "effector-logger": "^0.14.0",
+    "effector-react": "^22.5.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -39,6 +42,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.8",
     "typescript": "*",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "vite-plugin-babel": "^1.1.3"
   }
 }
