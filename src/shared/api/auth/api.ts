@@ -1,4 +1,4 @@
-import { get, post } from 'axios'
+import * as axios from 'axios'
 import { createEffect } from 'effector'
 
 import { getBase } from '@/shared/api/lib'
@@ -17,7 +17,7 @@ const REGISTER_BASE = getBase('register')
 export const sendPhoneConfirmationCodeFx = createEffect(
   async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (
-      await get(AUTH_BASE, {
+      await axios.get(AUTH_BASE, {
         params: { phoneNumber },
       })
     ).data,
@@ -26,7 +26,7 @@ export const sendPhoneConfirmationCodeFx = createEffect(
 export const loginByPhoneNumberFx = createEffect(
   async (phoneNumber: string, code: string): Promise<ApiResponse<AuthUserDto>> =>
     (
-      await get(LOGIN_BASE, {
+      await axios.get(LOGIN_BASE, {
         params: {
           phoneNumber,
           code,
@@ -37,13 +37,13 @@ export const loginByPhoneNumberFx = createEffect(
 
 export const loginIntoCompanyFx = createEffect(
   async (userId: string, companyId: string): Promise<ApiResponse<AuthUserDto>> =>
-    (await get(LOGIN_BASE + `company/${companyId}`, { params: { userId } })).data,
+    (await axios.get(LOGIN_BASE + `company/${companyId}`, { params: { userId } })).data,
 )
 
 export const checkPhoneNumberFx = createEffect(
   async (phoneNumber: string, code: string): Promise<ApiResponse<ConfirmationStatus>> =>
     (
-      await get(REGISTER_BASE + 'check_phone_number', {
+      await axios.get(REGISTER_BASE + 'check_phone_number', {
         params: {
           phoneNumber,
           code,
@@ -54,5 +54,5 @@ export const checkPhoneNumberFx = createEffect(
 
 export const registerFx = createEffect(
   async (dto: CreateUserDto): Promise<ApiResponse<AuthUserDto>> =>
-    (await post(REGISTER_BASE, dto)).data,
+    (await axios.post(REGISTER_BASE, dto)).data,
 )
