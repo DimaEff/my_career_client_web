@@ -1,4 +1,4 @@
-import * as axios from 'axios'
+import axios from 'axios'
 import { createEffect } from 'effector'
 
 import { getBase } from '@/shared/api/lib'
@@ -14,13 +14,17 @@ const AUTH_BASE = getBase('auth')
 const LOGIN_BASE = getBase('login')
 const REGISTER_BASE = getBase('register')
 
-export const sendPhoneConfirmationCodeFx = createEffect(
+export const sendPhoneConfirmationCodeFx1 = createEffect(
   async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (
       await axios.get(AUTH_BASE, {
         params: { phoneNumber },
       })
     ).data,
+)
+
+export const sendPhoneConfirmationCodeFx = createEffect(async (phoneNumber: string) =>
+  console.log('phoneNumber', phoneNumber),
 )
 
 export const loginByPhoneNumberFx = createEffect(

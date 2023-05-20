@@ -1,5 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { attachLogger } from 'effector-logger'
+import { NextUIProvider } from '@nextui-org/react'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import { attachLogger } from 'effector-logger' // some error with importing from
 
 import { getRoutes } from '@/app/routing'
 
@@ -10,7 +13,11 @@ const router = createBrowserRouter(getRoutes())
 attachLogger()
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <NextUIProvider>
+      <RouterProvider router={router} />
+    </NextUIProvider>
+  )
 }
 
 export default App
