@@ -1,13 +1,12 @@
-import React from 'react'
+import { Box } from '@mui/material'
 
-import PhoneNumberNotification from '@/features/confirmation/ui/phoneNumberNotification.tsx'
+import LoginPhoneNumberConfirmation from '@/widgets/LoginSendPhoneConfirmation'
 
 const Home = () => {
   return (
-    <div>
-      home
-      <PhoneNumberNotification />
-    </div>
+    <Box>
+      <LoginPhoneNumberConfirmation />
+    </Box>
   )
 }
 

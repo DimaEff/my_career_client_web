@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { createEffect } from 'effector'
 
+import { type PhoneNumberCode } from '@/shared/api/auth/models'
 import { getBase } from '@/shared/api/lib'
 import {
   type ApiResponse,
@@ -14,7 +15,7 @@ const AUTH_BASE = getBase('auth')
 const LOGIN_BASE = getBase('login')
 const REGISTER_BASE = getBase('register')
 
-export const sendPhoneConfirmationCodeFx1 = createEffect(
+export const sendPhoneConfirmationCodeFx = createEffect(
   async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (
       await axios.get(AUTH_BASE, {
@@ -23,14 +24,10 @@ export const sendPhoneConfirmationCodeFx1 = createEffect(
     ).data,
 )
 
-export const sendPhoneConfirmationCodeFx = createEffect(async (phoneNumber: string) =>
-  console.log('phoneNumber', phoneNumber),
-)
-
 export const loginByPhoneNumberFx = createEffect(
-  async (phoneNumber: string, code: string): Promise<ApiResponse<AuthUserDto>> =>
+  async ({ phoneNumber, code }: PhoneNumberCode) =>
     (
-      await axios.get(LOGIN_BASE, {
+      await axios.get<ApiResponse<AuthUserDto>>(LOGIN_BASE, {
         params: {
           phoneNumber,
           code,

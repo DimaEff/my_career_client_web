@@ -1,41 +1,25 @@
-import { type FC, useMemo } from 'react'
-import { Input, type InputProps } from '@nextui-org/react'
+import { type FC } from 'react'
+import { TextField, type TextFieldProps } from '@mui/material'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import { type FieldConfig, useField } from 'effector-forms'
-
-import { Info } from '@/shared/ui/Info'
 
 interface FormInputProps {
   field: FieldConfig
   message?: string
 }
 
-const FormInput: FC<FormInputProps & Partial<InputProps>> = ({
-  field,
-  color,
-  message,
-  ...props
-}) => {
-  const { value, onChange, errorText } = useField(field)
-  const errorTextString = errorText()
-  const colorWithValidation = useMemo(
-    () => (errorTextString !== undefined ? 'error' : color),
-    [color, errorTextString],
-  )
+const FormInput: FC<FormInputProps & TextFieldProps> = ({ field, color, message, ...props }) => {
+  const { value, onChange, errors } = useField(field)
 
   return (
-    <Input
+    <TextField
+      error={errors.length !== 0}
+      helperText={errors[0]?.errorText}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      contentRight={
-        (Boolean(errorTextString) || Boolean(message)) && (
-          <Info message={errorTextString} color={colorWithValidation} />
-        )
-      }
-      color={colorWithValidation}
       {...props}
-      contentClickable
+      fullWidth
     />
   )
 }

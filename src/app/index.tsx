@@ -1,22 +1,23 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { NextUIProvider } from '@nextui-org/react'
+import { ThemeProvider } from '@mui/material/styles'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import { attachLogger } from 'effector-logger' // some error with importing from
 
 import { getRoutes } from '@/app/routing'
+import { theme } from '@/app/theme.ts'
 
 import 'normalize.css'
 
-const router = createBrowserRouter(getRoutes())
-
 attachLogger()
 
-function App() {
+const App = () => {
+  const router = createBrowserRouter(getRoutes())
+
   return (
-    <NextUIProvider>
+    <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
-    </NextUIProvider>
+    </ThemeProvider>
   )
 }
 
