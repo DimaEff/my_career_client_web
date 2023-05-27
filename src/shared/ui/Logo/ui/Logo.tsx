@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import logoImage from '@/assets/icons/logo.png'
 import { type LogoSize } from '@/shared/ui/Logo/lib/types.ts'
@@ -7,14 +7,26 @@ import { useLogoSize } from '@/shared/ui/Logo/lib/useLogoSize.ts'
 
 interface LogoProps {
   size?: LogoSize
+  withName?: true
 }
 
-const Logo: FC<LogoProps> = ({ size }) => {
-  const width = useLogoSize(size ?? 'md')
+const Logo: FC<LogoProps> = ({ size, withName }) => {
+  const { height, nameSize } = useLogoSize(size ?? 'md')
 
   return (
-    <Box sx={{ width }}>
-      <img style={{ width: '100%' }} src={logoImage} />
+    <Box
+      sx={{
+        display: 'flex',
+        flexFlow: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <img style={{ height }} src={logoImage} alt={'logo'} />
+      {withName && (
+        <Typography fontWeight={700} variant={nameSize}>
+          Мой карьер
+        </Typography>
+      )}
     </Box>
   )
 }

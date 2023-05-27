@@ -8,6 +8,9 @@ const buttonOverrides: Components<Theme>['MuiButton'] = {
 }
 
 export const theme = createTheme({
+  typography: {
+    fontFamily: ['Comfortaa', 'Roboto'].join(','),
+  },
   components: {
     MuiButton: buttonOverrides,
     MuiLoadingButton: buttonOverrides,

@@ -12,7 +12,7 @@ const CenteredContainer: FC<PropsWithChildren<CenteredContainerProps>> = ({
   withLogo,
 }) => {
   const theme = useTheme()
-  const logoMargin = 20
+  const logoMargin = 24
 
   return (
     <Box
@@ -39,7 +39,7 @@ const CenteredContainer: FC<PropsWithChildren<CenteredContainerProps>> = ({
               justifyContent: 'center',
             }}
           >
-            <Logo size={'lg'} />
+            <Logo size={'lg'} withName />
           </Box>
         )}
         <Box

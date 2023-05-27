@@ -9,7 +9,7 @@ const PrettyTitle: FC<PropsWithChildren> = ({ children }) => {
       variant={'h4'}
       sx={{
         fontSize: 40,
-        fontWeight: '600',
+        fontWeight: 600,
         background: GRADIENT.PURPLE_PINK,
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
