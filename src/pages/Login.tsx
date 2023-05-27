@@ -1,4 +1,4 @@
-import CenteredContainer from '@/shared/ui/CenteredContainer'
+import CenteredContainer from '../widgets/CenteredContainer'
 import LoginPhoneNumberConfirmation from '@/widgets/LoginSendPhoneConfirmation'
 
 const Login = () => {
