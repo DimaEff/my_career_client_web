@@ -1,8 +1,7 @@
 import { type RouteObject } from 'react-router-dom'
 
-import { Code, Home, Login, Register } from '@/pages'
+import { Code, Home, Login, Register, RootLayout } from '@/pages'
 import { PATHS } from '@/shared/paths'
-import { RootLayout } from '../pages/RootLayout'
 
 export const getRoutes = (): RouteObject[] => [
   {

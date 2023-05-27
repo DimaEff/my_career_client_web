@@ -1,18 +1,11 @@
-import { Box } from '@mui/material'
-
+import CenteredContainer from '@/shared/ui/CenteredContainer'
 import LoginPhoneNumberConfirmation from '@/widgets/LoginSendPhoneConfirmation'
 
 const Login = () => {
   return (
-    <Box
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <CenteredContainer withLogo>
       <LoginPhoneNumberConfirmation />
-    </Box>
+    </CenteredContainer>
   )
 }
 

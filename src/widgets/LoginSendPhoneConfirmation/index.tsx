@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, CardActions, CardContent } from '@mui/material'
+import { Card, CardActions, CardContent, Typography } from '@mui/material'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import { useField } from 'effector-forms'
@@ -20,7 +20,9 @@ const LoginPhoneNumberConfirmation = () => {
         <PhoneNumberConfirmation onSendCode={() => navigate(PATHS.LOGIN.CODE(phoneNumber.value))} />
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Link to={PATHS.REGISTER}>Don`t have an account? Create a new one!</Link>
+        <Typography>
+          <Link to={PATHS.REGISTER}>Don`t have an account? Create a new one!</Link>
+        </Typography>
       </CardActions>
     </Card>
   )
