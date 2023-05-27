@@ -1,5 +1,5 @@
 import React, { type FC } from 'react'
-import { Grid } from '@nextui-org/react'
+import { Grid } from '@mui/material'
 
 interface GridFormContainerProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
@@ -10,19 +10,29 @@ interface GridFormContainerProps {
 const GridFormContainer: FC<GridFormContainerProps> = ({ onSubmit, inputs, buttons }) => {
   return (
     <form onSubmit={onSubmit}>
-      <Grid.Container
-        gap={1}
-        css={{
+      <Grid
+        container
+        spacing={2}
+        sx={{
           alignItems: 'center',
           justifyContent: 'center',
           padding: 0,
         }}
       >
-        <Grid xs={12}>{inputs}</Grid>
-        <Grid xs={12} justify={'center'}>
+        <Grid item xs={12}>
+          {inputs}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           {buttons}
         </Grid>
-      </Grid.Container>
+      </Grid>
     </form>
   )
 }
