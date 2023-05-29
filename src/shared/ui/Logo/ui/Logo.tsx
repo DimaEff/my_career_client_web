@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Box, Typography } from '@mui/material'
 
 import logoImage from '@/assets/icons/logo.png'
@@ -11,6 +12,7 @@ interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = ({ size, withName }) => {
+  const { t } = useTranslation()
   const { height, nameSize } = useLogoSize(size ?? 'md')
 
   return (
@@ -24,7 +26,7 @@ const Logo: FC<LogoProps> = ({ size, withName }) => {
       <img style={{ height }} src={logoImage} alt={'logo'} />
       {withName && (
         <Typography fontWeight={700} variant={nameSize}>
-          Мой карьер
+          {t('AppName')}
         </Typography>
       )}
     </Box>

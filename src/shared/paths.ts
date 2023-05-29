@@ -5,4 +5,5 @@ export const PATHS = {
     CODE: (phoneNumber = ':phoneNumber') => `/login/${phoneNumber}/code`,
   },
   REGISTER: '/register',
+  COMPANIES: '/companies',
 } as const

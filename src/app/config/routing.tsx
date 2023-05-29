@@ -1,7 +1,8 @@
 import { type RouteObject } from 'react-router-dom'
 
 import { Code, Home, Login, Register, RootLayout } from '@/pages'
-import { PATHS } from '@/shared/paths'
+import Companies from '@/pages/Companies.tsx'
+import { PATHS } from '@/shared/paths.ts'
 
 export const getRoutes = (): RouteObject[] => [
   {
@@ -28,6 +29,10 @@ export const getRoutes = (): RouteObject[] => [
       {
         path: PATHS.REGISTER,
         element: <Register />,
+      },
+      {
+        path: PATHS.COMPANIES,
+        element: <Companies />,
       },
     ],
   },

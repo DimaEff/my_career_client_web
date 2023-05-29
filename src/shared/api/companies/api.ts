@@ -17,6 +17,9 @@ export const getUserCompaniesFx = createEffect(
     (await axios.get(BASE_URL, { params: { userId } })).data,
 )
 
+export const getUserCompanies = async (userId: Id): Promise<ApiResponse<CompanyDto[]>> =>
+  (await axios.get(BASE_URL, { params: { userId } })).data
+
 export const createCompanyFx = createEffect(
   async (dto: CreateCompanyDto, userId: Id): Promise<ApiResponse<CompanyDto>> =>
     (await axios.post(BASE_URL, dto, { params: { userId } })).data,

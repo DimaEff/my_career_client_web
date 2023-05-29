@@ -5,23 +5,32 @@ import { LoadingButton } from '@mui/lab'
 import { useForm } from 'effector-forms'
 import { useStore } from 'effector-react'
 
-import { phoneNumberForm, sendCodeFx } from '@/features/confirmation/model'
+import { phoneNumberForm } from '@/features/confirmation/model'
 import GridFormContainer from '@/features/confirmation/ui/GridFormContainer.tsx'
-import { sendPhoneConfirmationCodeFx } from '@/shared/api'
 import FormInput from '@/shared/ui/FormInput'
+import { useRootStore } from '@/stores/useRootStore.ts'
 
 interface PhoneNumberConfirmationProps {
   onSendCode: () => void
 }
 
 const PhoneNumberConfirmation: FC<PhoneNumberConfirmationProps> = ({ onSendCode }) => {
-  const pending = useStore(sendPhoneConfirmationCodeFx.pending)
-  const { submit } = useForm(phoneNumberForm)
-  sendCodeFx.use(onSendCode)
+  // const pending = useStore(sendPhoneConfirmationCodeFx.pending)
+  const { eachValid } = useForm(phoneNumberForm)
+  const phoneNumber = useStore(phoneNumberForm.fields.phoneNumber.$value)
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const {
+    authStore: { sendCodeToPhoneNumber },
+  } = useRootStore()
+  // sendCodeFx.use(onSendCode)
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    submit()
+    // submit()
+    if (eachValid) {
+      await sendCodeToPhoneNumber(phoneNumber as string)
+      onSendCode()
+    }
   }
 
   return (
@@ -29,7 +38,7 @@ const PhoneNumberConfirmation: FC<PhoneNumberConfirmationProps> = ({ onSendCode 
       onSubmit={onSubmit}
       inputs={<FormInput field={phoneNumberForm.fields.phoneNumber} />}
       buttons={
-        <LoadingButton type={'submit'} loading={pending}>
+        <LoadingButton type={'submit'} loading={false}>
           Send a code
         </LoadingButton>
       }

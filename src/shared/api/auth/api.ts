@@ -18,33 +18,52 @@ const REGISTER_BASE = getBase('register')
 export const sendPhoneConfirmationCodeFx = createEffect(
   async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (
-      await axios.get(AUTH_BASE, {
+      await axios.get(AUTH_BASE + '/send_phone_confirmation', {
         params: { phoneNumber },
       })
     ).data,
 )
 
-export const loginByPhoneNumberFx = createEffect(
-  async ({ phoneNumber, code }: PhoneNumberCode) =>
-    (
-      await axios.get<ApiResponse<AuthUserDto>>(LOGIN_BASE, {
-        params: {
-          phoneNumber,
-          code,
-        },
-      })
-    ).data,
-)
+export const sendPhoneConfirmationCode = async (
+  phoneNumber: string,
+): Promise<ApiResponse<SendConfirmationDto>> =>
+  (
+    await axios.get(AUTH_BASE + '/send_phone_confirmation', {
+      params: { phoneNumber },
+    })
+  ).data
+
+// export const loginByPhoneNumberFx = createEffect(
+//   async ({ phoneNumber, code }: PhoneNumberCode) =>
+//     (
+//       await axios.get<ApiResponse<AuthUserDto>>(LOGIN_BASE, {
+//         params: {
+//           phoneNumber,
+//           code,
+//         },
+//       })
+//     ).data,
+// )
+
+export const loginByPhoneNumberFx = async ({ phoneNumber, code }: PhoneNumberCode) =>
+  (
+    await axios.get<ApiResponse<AuthUserDto>>(LOGIN_BASE, {
+      params: {
+        phoneNumber,
+        code,
+      },
+    })
+  ).data
 
 export const loginIntoCompanyFx = createEffect(
   async (userId: string, companyId: string): Promise<ApiResponse<AuthUserDto>> =>
-    (await axios.get(LOGIN_BASE + `company/${companyId}`, { params: { userId } })).data,
+    (await axios.get(LOGIN_BASE + `/company/${companyId}`, { params: { userId } })).data,
 )
 
 export const checkPhoneNumberFx = createEffect(
   async (phoneNumber: string, code: string): Promise<ApiResponse<ConfirmationStatus>> =>
     (
-      await axios.get(REGISTER_BASE + 'check_phone_number', {
+      await axios.get(REGISTER_BASE + '/check_phone_number', {
         params: {
           phoneNumber,
           code,

@@ -42,8 +42,10 @@ export function size(value: string, minOrLength: number, max?: number): boolean 
   return length >= minOrLength && length <= max
 }
 
-const RU_PHONE_NUMBER_REGEX = /(^7|8)((\d{10})|(\s\(\d{3}\)\s\d{3}\s\d{2}\s\d{2}))/
+export const REGULAR_EXPRESSIONS = {
+  // eslint-disable-next-line prettier/prettier,no-useless-escape
+  RU_PHONE_NUMBER: /(^7|8)((d{10})|(s(d{3})sd{3}sd{2}sd{2}))/,
+} as const
 
-export const ruPhoneNumberSchema = string().required().matches(RU_PHONE_NUMBER_REGEX, {
-  message: 'Номер телефона должен быть вида: 7-000-000-00-00',
-})
+// export const ruPhoneNumberSchema = string().required().matches(REGULAR_EXPRESSIONS.RU_PHONE_NUMBER)
+export const ruPhoneNumberSchema = string().required()
