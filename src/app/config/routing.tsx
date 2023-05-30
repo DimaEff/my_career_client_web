@@ -19,17 +19,17 @@ export const getRoutes = (isAuth: boolean): RouteObject[] => [
         children: [
           {
             index: true,
-            element: <Login />,
+            element: !isAuth ? <Login /> : <Redirect to={PATHS.HOME} />,
           },
           {
             path: PATHS.LOGIN.CODE(),
-            element: <Code />,
+            element: !isAuth ? <Code /> : <Redirect to={PATHS.HOME} />,
           },
         ],
       },
       {
         path: PATHS.REGISTER,
-        element: !isAuth ? <Register /> : <Home />,
+        element: !isAuth ? <Register /> : <Redirect to={PATHS.HOME} />,
       },
       {
         path: PATHS.COMPANIES,

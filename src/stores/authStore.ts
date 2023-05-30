@@ -1,10 +1,18 @@
+import axios from 'axios'
 import { makeAutoObservable } from 'mobx'
 
-import { loginByPhoneNumberFx, loginIntoCompany, sendPhoneConfirmationCode } from '@/shared/api'
+import {
+  authByJwt,
+  loginByPhoneNumberFx,
+  loginIntoCompany,
+  sendPhoneConfirmationCode,
+} from '@/shared/api'
 import { type CompanyDto, type UserDto } from '@/shared/api/models'
 import { type RootStore } from '@/stores/rootStore.ts'
 
 export class AuthStore {
+  private readonly JWT_TOKEN_PROP_NAME = 'jwtToken'
+
   user: UserDto | null = null
   company: CompanyDto | null = null
 
@@ -12,6 +20,21 @@ export class AuthStore {
 
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this)
+  }
+
+  public readonly initUser = async () => {
+    const jwt = this.getJwtToken()
+
+    if (jwt === null) {
+      return
+    }
+
+    const res = await authByJwt(jwt)
+    this.user = res.payload.user
+    this.company = res.payload.company
+    this.jwtToken = res.payload.jwtToken
+    this.setJwtTokenToLocalStorage(res.payload.jwtToken)
+    this.setDefaultBearerToken(res.payload.jwtToken)
   }
 
   public readonly sendCodeToPhoneNumber = async (phoneNumber: string) => {
@@ -40,9 +63,11 @@ export class AuthStore {
       return
     }
 
+    this.user = res.payload.user
     this.company = res.payload.company
     this.jwtToken = res.payload.jwtToken
     this.setJwtTokenToLocalStorage(res.payload.jwtToken)
+    this.setDefaultBearerToken(res.payload.jwtToken as string)
   }
 
   public readonly logout = () => {
@@ -52,14 +77,20 @@ export class AuthStore {
     this.setJwtTokenToLocalStorage(null)
   }
 
-  private readonly setJwtTokenToLocalStorage = (jwtToken: string | null) => {
-    const jwtTokenPropName = 'jwtToken'
+  private readonly setDefaultBearerToken = (jwtToken: string) => {
+    // eslint-disable-next-line prettier/prettier
+    axios.defaults.headers.common = { 'Authorization': `Bearer ${jwtToken}`
+  }
+  }
 
+  private readonly getJwtToken = () => window.localStorage.getItem(this.JWT_TOKEN_PROP_NAME)
+
+  private readonly setJwtTokenToLocalStorage = (jwtToken: string | null) => {
     if (jwtToken === null) {
-      window.localStorage.removeItem(jwtTokenPropName)
+      window.localStorage.removeItem(this.JWT_TOKEN_PROP_NAME)
       return
     }
 
-    window.localStorage.setItem(jwtTokenPropName, jwtToken)
+    window.localStorage.setItem(this.JWT_TOKEN_PROP_NAME, jwtToken)
   }
 }

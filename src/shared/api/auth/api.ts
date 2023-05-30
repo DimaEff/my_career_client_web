@@ -15,6 +15,14 @@ const AUTH_BASE = getBase('auth')
 const LOGIN_BASE = getBase('login')
 const REGISTER_BASE = getBase('register')
 
+export const authByJwt = async (jwtToken: string) =>
+  (
+    await axios.get(LOGIN_BASE + '/auth_by_jwt', {
+      // eslint-disable-next-line prettier/prettier
+      headers: { 'Authorization': `Bearer ${jwtToken}` },
+    })
+  ).data
+
 export const sendPhoneConfirmationCodeFx = createEffect(
   async (phoneNumber: string): Promise<ApiResponse<SendConfirmationDto>> =>
     (

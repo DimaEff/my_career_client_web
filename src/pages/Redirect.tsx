@@ -4,9 +4,9 @@ import { observer } from 'mobx-react-lite'
 
 import { PATHS } from '@/shared/paths.ts'
 
-const Redirect = () => {
+const Redirect = ({ to }: { to?: string }) => {
   const navigate = useNavigate()
-  useEffect(() => navigate(PATHS.LOGIN.INDEX))
+  useEffect(() => navigate(to ?? PATHS.LOGIN.INDEX))
 
   return null
 }

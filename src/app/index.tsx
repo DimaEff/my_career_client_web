@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -16,9 +16,14 @@ attachLogger()
 
 const App = () => {
   const {
-    authStore: { user },
+    authStore: { user, initUser },
   } = useRootStore()
   const router = createBrowserRouter(getRoutes(user !== null))
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    initUser()
+  }, [initUser])
 
   return (
     <Suspense fallback={'loading...'}>
