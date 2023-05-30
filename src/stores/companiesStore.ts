@@ -2,8 +2,8 @@
 import { makeAutoObservable } from 'mobx'
 
 import { type RootStore } from '@/stores/rootStore.ts'
-import { CompanyDto } from '@/shared/api/models'
-import { getUserCompanies } from '@/shared/api'
+import { type CompanyDto, type CreateCompanyDto } from '@/shared/api/models'
+import { createCompany, getUserCompanies } from '@/shared/api'
 
 export class CompaniesStore {
   currentCompany: CompanyDto | null = null
@@ -16,5 +16,9 @@ export class CompaniesStore {
   public readonly fetchCompanies = async (userId: number) => {
     const res = await getUserCompanies(userId)
     this.companies = res.payload
+  }
+
+  public readonly createCompany = async (dto: CreateCompanyDto, userId: number) => {
+    await createCompany(dto, userId)
   }
 }

@@ -5,6 +5,10 @@
   "EnterCodeFromMessage": "Введите код из сообщения",
   "HaveNotAccountLink": "У Вас нет аккаунта? Зарегистрируйтесь!",
   "AddNewCompany": "Добавить новую компанию",
+  "EnterInformationAboutCompany": "Заполните информацию о вашей компании",
+  "CreateCompany": "Создать",
+  "Title": "Название",
+  "NotItems": "Пустой список.",
   "FormError": {
     "MatchError": "Поле должно соответсвовать вырадению {{ regex }}",
     "Required": "Это поле является обязательным.",

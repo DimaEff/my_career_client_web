@@ -5,6 +5,10 @@
   "EnterCodeFromMessage": "Enter the code from the message",
   "HaveNotAccountLink": "Don`t have an account? Create a new one!",
   "AddNewCompany": "Add a new company",
+  "EnterInformationAboutCompany": "Enter information about your company",
+  "CreateCompany": "Create",
+  "Title": "Title",
+  "NotItems": "Empty list.",
   "FormError": {
     "MatchError": "The field must match the expression: {{ regex }}",
     "Required": "The field is required.",

@@ -1,8 +1,8 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material'
 
 import { Logo } from '@/shared/ui/Logo'
-import AuthButtons from '@/widgets/NavBar/ui/AuthButtons.tsx'
 import Navigation from '@/widgets/NavBar/ui/Navigation.tsx'
+import UserInfo from '@/widgets/NavBar/ui/UserInfo.tsx'
 
 const NavBar = () => {
   return (
@@ -22,7 +22,7 @@ const NavBar = () => {
               </Typography>
               <Navigation />
             </Box>
-            <AuthButtons />
+            <UserInfo />
           </Box>
         </Toolbar>
       </AppBar>

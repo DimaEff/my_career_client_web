@@ -60,6 +60,12 @@ export const loginIntoCompanyFx = createEffect(
     (await axios.get(LOGIN_BASE + `/company/${companyId}`, { params: { userId } })).data,
 )
 
+export const loginIntoCompany = async (
+  userId: number,
+  companyId: number,
+): Promise<ApiResponse<AuthUserDto>> =>
+  (await axios.get(LOGIN_BASE + `/company/${companyId}`, { params: { userId } })).data
+
 export const checkPhoneNumberFx = createEffect(
   async (phoneNumber: string, code: string): Promise<ApiResponse<ConfirmationStatus>> =>
     (

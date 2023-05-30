@@ -5,6 +5,10 @@ export const LOCALES = {
   ENTER_CODE_FROM_MESSAGE: 'EnterCodeFromMessage',
   HAVE_NOT_ACCOUNT_LINK: 'HaveNotAccountLink',
   ADD_COMPANY: 'Add a new company',
+  ENTER_INFORMATION_ABOUT_COMPANY: 'EnterInformationAboutCompany',
+  CREATE_COMPANY: 'Create',
+  TITLE: 'Title',
+  NOT_ITEMS: 'NotItems',
   FORM_ERROR: {
     REQUIRED: 'FormError.Required',
     MIN_LENGTH: 'FormError.MinLength',
@@ -14,6 +18,6 @@ export const LOCALES = {
   },
   PATH_NAME: {
     HOME: 'PathName.Home',
-    COMPANIES: 'PathName.Companies'
+    COMPANIES: 'PathName.Companies',
   },
 } as const

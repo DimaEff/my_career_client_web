@@ -25,6 +25,12 @@ export const createCompanyFx = createEffect(
     (await axios.post(BASE_URL, dto, { params: { userId } })).data,
 )
 
+export const createCompany = async (
+  dto: CreateCompanyDto,
+  userId: Id,
+): Promise<ApiResponse<CompanyDto>> =>
+  (await axios.post(BASE_URL, dto, { params: { userId } })).data
+
 export const addUserToCompanyFx = createEffect(
   async (phoneNumber: string, roleId: Id): Promise<ApiResponse<string>> =>
     (
