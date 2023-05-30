@@ -10,7 +10,7 @@ const RootLayout = () => {
   return (
     <>
       {shouldHideNavigationBar || <NavBar />}
-      <Container maxWidth={'lg'}>
+      <Container maxWidth={'lg'} sx={{ mt: 2 }}>
         <Outlet />
       </Container>
     </>

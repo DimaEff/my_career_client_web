@@ -4,11 +4,16 @@ export const LOCALES = {
   SEND_CONFIRMATION_CODE: 'SendConfirmationCode',
   ENTER_CODE_FROM_MESSAGE: 'EnterCodeFromMessage',
   HAVE_NOT_ACCOUNT_LINK: 'HaveNotAccountLink',
+  ADD_COMPANY: 'Add a new company',
   FORM_ERROR: {
     REQUIRED: 'FormError.Required',
     MIN_LENGTH: 'FormError.MinLength',
     MAX_LENGTH: 'FormError.MaxLength',
     RUSSIAN_PHONE_NUMBER: 'FormError.RussianPhoneNumber',
     MATCH_ERROR: 'MatchError',
+  },
+  PATH_NAME: {
+    HOME: 'PathName.Home',
+    COMPANIES: 'PathName.Companies'
   },
 } as const

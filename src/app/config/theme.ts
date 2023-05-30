@@ -8,6 +8,11 @@ const buttonOverrides: Components<Theme>['MuiButton'] = {
 }
 
 export const theme = createTheme({
+  palette: {
+    secondary: {
+      main: '#fff',
+    },
+  },
   typography: {
     fontFamily: ['Comfortaa', 'Roboto'].join(','),
   },

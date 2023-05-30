@@ -3,6 +3,8 @@ import { Link as RLink, type LinkProps as RLinkProps } from 'react-router-dom'
 import { Typography, type TypographyProps } from '@mui/material'
 
 const Link: FC<PropsWithChildren<TypographyProps & Pick<RLinkProps, 'to'>>> = ({
+  children,
+  color,
   to,
   ...props
 }) => {
@@ -10,7 +12,7 @@ const Link: FC<PropsWithChildren<TypographyProps & Pick<RLinkProps, 'to'>>> = ({
     <Typography
       sx={(theme) => ({
         '& > a': {
-          color: theme.palette.primary.main,
+          color: color || theme.palette.primary.main,
           textDecoration: 'none',
           '&:hover': {
             textDecoration: 'underline',
@@ -19,7 +21,7 @@ const Link: FC<PropsWithChildren<TypographyProps & Pick<RLinkProps, 'to'>>> = ({
       })}
       {...props}
     >
-      <RLink to={to}>Don`t have an account? Create a new one!</RLink>
+      <RLink to={to}>{children}</RLink>
     </Typography>
   )
 }

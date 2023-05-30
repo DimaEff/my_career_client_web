@@ -1,18 +1,29 @@
-import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography } from '@mui/material'
+
+import { Logo } from '@/shared/ui/Logo'
+import AuthButtons from '@/widgets/NavBar/ui/AuthButtons.tsx'
+import Navigation from '@/widgets/NavBar/ui/Navigation.tsx'
 
 const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color='inherit'>Login</Button>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box display={'flex'}>
+              <Typography variant='h6' component='div'>
+                <Logo size={'sm'} />
+              </Typography>
+              <Navigation />
+            </Box>
+            <AuthButtons />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

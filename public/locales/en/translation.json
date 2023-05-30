@@ -4,11 +4,16 @@
   "SendConfirmationCode": "Send a confirmation code",
   "EnterCodeFromMessage": "Enter the code from the message",
   "HaveNotAccountLink": "Don`t have an account? Create a new one!",
+  "AddNewCompany": "Add a new company",
   "FormError": {
     "MatchError": "The field must match the expression: {{ regex }}",
     "Required": "The field is required.",
     "MinLength": "Min length is {{ length }} symbols.",
     "MaxLength": "Max length is {{ length }} symbols.",
     "RussianPhoneNumber": "The phone number must be like: 7-000-000-00-00."
+  },
+  "PathName": {
+    "Home": "Home",
+    "Companies": "Companies"
   }
 }
