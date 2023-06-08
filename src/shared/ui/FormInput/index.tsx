@@ -1,27 +1,24 @@
-import { type FC } from 'react'
+import { forwardRef } from 'react'
+import { type FieldError } from 'react-hook-form'
 import { TextField, type TextFieldProps } from '@mui/material'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import { type FieldConfig, useField } from 'effector-forms'
 
 interface FormInputProps {
-  field: FieldConfig
-  message?: string
+  fieldError: FieldError | undefined
 }
 
-const FormInput: FC<FormInputProps & TextFieldProps> = ({ field, color, message, ...props }) => {
-  const { value, onChange, errors } = useField(field)
-
-  return (
-    <TextField
-      error={errors.length !== 0}
-      helperText={errors[0]?.errorText}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      {...props}
-      fullWidth
-    />
-  )
-}
+// eslint-disable-next-line react/display-name
+const FormInput = forwardRef<HTMLInputElement, FormInputProps & TextFieldProps>(
+  ({ fieldError, ...props }, ref) => {
+    return (
+      <TextField
+        error={!!fieldError?.message}
+        helperText={fieldError?.message}
+        ref={ref}
+        {...props}
+        fullWidth
+      />
+    )
+  },
+)
 
 export default FormInput

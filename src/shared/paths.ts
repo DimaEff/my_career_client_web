@@ -6,4 +6,5 @@ export const PATHS = {
   },
   REGISTER: '/register',
   COMPANIES: '/companies',
+  ROLES: '/roles',
 } as const

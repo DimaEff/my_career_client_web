@@ -13,23 +13,33 @@ import {
 
 export const BASE_URL = getBase('roles')
 
+export const getAllPermissions = async () =>
+  (await axios.get<ApiResponse<PermissionDto[]>>(BASE_URL + '/permissions')).data
+
 export const getUserRolesFx = createEffect(
   async (): Promise<ApiResponse<RoleDto[]>> => (await axios.get(BASE_URL)).data,
 )
 
+export const getUserRoles = async (): Promise<ApiResponse<RoleDto[]>> =>
+  (await axios.get(BASE_URL)).data
+
 export const getCompanyRolesFx = createEffect(
   async (companyId: Id): Promise<ApiResponse<RoleDto[]>> =>
-    (await axios.get(BASE_URL + `${companyId}`)).data,
+    (await axios.get(BASE_URL + `/company/${companyId}`)).data,
 )
 
+export const getCompanyRoles = async (companyId: Id): Promise<ApiResponse<RoleDto[]>> =>
+  (await axios.get(BASE_URL + `/company/${companyId}`)).data
+
 export const createRoleFx = createEffect(
-  async (dto: CreateRoleDto): Promise<ApiResponse<RoleDto>> => (await axios.post(BASE_URL, dto)).data,
+  async (dto: CreateRoleDto): Promise<ApiResponse<RoleDto>> =>
+    (await axios.post(BASE_URL, dto)).data,
 )
 
 export const addRoleToUserFx = createEffect(
   async (userId: Id, roleId: Id): Promise<ApiResponse<string>> =>
     (
-      await axios.get(BASE_URL + 'add_to_user', {
+      await axios.get(BASE_URL + '/add_to_user', {
         params: {
           roleId,
           userId,
@@ -44,13 +54,27 @@ export const getRolePermissionsFx = createEffect(
   },
 )
 
+export const getRolePermissions = async (roleId: Id): Promise<ApiResponse<PermissionDto[]>> => {
+  return (await axios.get(BASE_URL + `/${roleId}/permissions`)).data
+}
+
 export const addPermissionToRoleFx = createEffect(
   async (dto: UpdateRolePermissionsDto): Promise<ApiResponse<string>> => {
-    return (await axios.post(BASE_URL + 'permissions/add', dto)).data
+    return (await axios.post(BASE_URL + '/permissions/add', dto)).data
   },
 )
+
+export const addPermissionToRole = async (
+  dto: UpdateRolePermissionsDto,
+): Promise<ApiResponse<string>> => {
+  return (await axios.post(BASE_URL + '/permissions/add', dto)).data
+}
 
 export const removePermissionFromRoleFx = createEffect(
   async (dto: UpdateRolePermissionsDto): Promise<ApiResponse<string>> =>
     (await axios.post(BASE_URL + '/permissions/remove', dto)).data,
 )
+
+export const removePermissionFromRole = async (
+  dto: UpdateRolePermissionsDto,
+): Promise<ApiResponse<string>> => (await axios.post(BASE_URL + '/permissions/remove', dto)).data

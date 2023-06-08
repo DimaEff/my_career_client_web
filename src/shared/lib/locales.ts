@@ -19,5 +19,6 @@ export const LOCALES = {
   PATH_NAME: {
     HOME: 'PathName.Home',
     COMPANIES: 'PathName.Companies',
+    ROLES: 'PathName.Roles',
   },
 } as const

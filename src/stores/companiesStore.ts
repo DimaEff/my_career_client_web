@@ -9,7 +9,7 @@ export class CompaniesStore {
   currentCompany: CompanyDto | null = null
   companies: CompanyDto[] | null = null
 
-  constructor(rootStore: RootStore) {
+  constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this)
   }
 

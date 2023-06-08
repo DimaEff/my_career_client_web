@@ -21,6 +21,10 @@ const Navigation = () => {
       path: PATHS.COMPANIES,
       name: LOCALES.PATH_NAME.COMPANIES,
     },
+    {
+      path: PATHS.ROLES,
+      name: LOCALES.PATH_NAME.ROLES,
+    },
   ]
 
   return (

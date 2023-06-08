@@ -4,6 +4,7 @@ import { Code, Home, Login, Register, RootLayout } from '@/pages'
 import Companies from '@/pages/Companies.tsx'
 import Redirect from '@/pages/Redirect.tsx'
 import { PATHS } from '@/shared/paths.ts'
+import Roles from '@/pages/Roles.tsx'
 
 export const getRoutes = (isAuth: boolean): RouteObject[] => [
   {
@@ -34,6 +35,10 @@ export const getRoutes = (isAuth: boolean): RouteObject[] => [
       {
         path: PATHS.COMPANIES,
         element: isAuth ? <Companies /> : <Redirect />,
+      },
+      {
+        path: PATHS.ROLES,
+        element: isAuth ? <Roles /> : <Redirect />,
       },
     ],
   },
