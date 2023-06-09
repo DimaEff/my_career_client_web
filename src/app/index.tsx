@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useMemo } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -16,9 +16,11 @@ attachLogger()
 
 const App = () => {
   const {
-    authStore: { user, initUser },
+    authStore: { user, initUser, company },
   } = useRootStore()
-  const router = createBrowserRouter(getRoutes(user !== null))
+
+  const routes = useMemo(() => getRoutes(user !== null, company !== null), [company, user])
+  const router = createBrowserRouter(routes)
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises

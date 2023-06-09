@@ -38,7 +38,7 @@ const PhoneNumberConfirmation: FC<PhoneNumberConfirmationProps> = ({ onSendCode 
   return (
     <GridFormContainer
       onSubmit={handleSubmit(onSubmit)}
-      inputs={<FormInput fieldError={errors.phoneNumber} {...register('phoneNumber')} />}
+      inputs={<FormInput fieldError={errors.phoneNumber} {...register('phoneNumber', {})} />}
       buttons={
         <LoadingButton type={'submit'} loading={false}>
           Send a code

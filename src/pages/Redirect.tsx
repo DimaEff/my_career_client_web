@@ -6,7 +6,7 @@ import { PATHS } from '@/shared/paths.ts'
 
 const Redirect = ({ to }: { to?: string }) => {
   const navigate = useNavigate()
-  useEffect(() => navigate(to ?? PATHS.LOGIN.INDEX))
+  useEffect(() => navigate(to ?? PATHS.LOGIN))
 
   return null
 }

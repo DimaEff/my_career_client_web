@@ -14,7 +14,7 @@ const SendPhoneNumberConfirmationCard = () => {
       <CardContent>
         <PrettyTitle>Enter a phone number</PrettyTitle>
         <PhoneNumberConfirmation
-          onSendCode={({ phoneNumber }) => navigate(PATHS.LOGIN.CODE(phoneNumber))}
+          onSendCode={({ phoneNumber }) => navigate(PATHS.CONFIRMATION_CODE(phoneNumber))}
         />
       </CardContent>
       <CardActions

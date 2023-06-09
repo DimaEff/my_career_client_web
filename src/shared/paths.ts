@@ -1,10 +1,8 @@
 export const PATHS = {
   HOME: '/',
-  LOGIN: {
-    INDEX: '/login',
-    CODE: (phoneNumber = ':phoneNumber') => `/login/${phoneNumber}/code`,
-  },
+  LOGIN: '/login',
   REGISTER: '/register',
+  CONFIRMATION_CODE: (phoneNumber = ':phoneNumber') => `/confirmation_code/${phoneNumber}`,
   COMPANIES: '/companies',
   ROLES: '/roles',
 } as const
