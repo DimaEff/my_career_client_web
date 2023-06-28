@@ -9,12 +9,22 @@ export const LOCALES = {
   CREATE_COMPANY: 'Create',
   TITLE: 'Title',
   NOT_ITEMS: 'NotItems',
-  FORM_ERROR: {
-    REQUIRED: 'FormError.Required',
-    MIN_LENGTH: 'FormError.MinLength',
-    MAX_LENGTH: 'FormError.MaxLength',
-    RUSSIAN_PHONE_NUMBER: 'FormError.RussianPhoneNumber',
-    MATCH_ERROR: 'MatchError',
+  REGISTER: 'Register',
+  FORM: {
+    ERROR: {
+      _index: 'Form.FormError.', // how do I can implement the name of section
+      REQUIRED: 'Form.FormError.Required',
+      MIN_LENGTH: 'Form.FormError.MinLength',
+      MAX_LENGTH: 'Form.FormError.MaxLength',
+      RUSSIAN_PHONE_NUMBER: 'Form.FormError.RussianPhoneNumber',
+      MATCH_ERROR: 'Form.MatchError',
+    },
+    FIELD_NAME: {
+      FIRST_NAME: 'Form.FieldName.FirstName',
+      SURNAME: 'Form.FieldName.Surname',
+      EMAIL: 'Form.FieldName.Email',
+      PHONE_NUMBER: 'Form.FieldName.PhoneNumber',
+    },
   },
   PATH_NAME: {
     HOME: 'PathName.Home',

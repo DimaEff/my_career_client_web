@@ -9,6 +9,7 @@
   "CreateCompany": "Create",
   "Title": "Title",
   "NotItems": "Empty list.",
+  "Register": "Register",
   "FormError": {
     "MatchError": "The field must match the expression: {{ regex }}",
     "Required": "The field is required.",

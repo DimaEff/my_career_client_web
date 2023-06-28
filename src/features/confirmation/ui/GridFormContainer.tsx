@@ -1,9 +1,9 @@
 import React, { type FC } from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Stack } from '@mui/material'
 
 interface GridFormContainerProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-  inputs: React.ReactElement
+  inputs: React.ReactElement | React.ReactElement[]
   buttons: React.ReactElement
 }
 
@@ -20,7 +20,9 @@ const GridFormContainer: FC<GridFormContainerProps> = ({ onSubmit, inputs, butto
         }}
       >
         <Grid item xs={12}>
-          {inputs}
+          <Stack spacing={1} sx={{ width: '100%' }}>
+            {inputs}
+          </Stack>
         </Grid>
         <Grid
           item

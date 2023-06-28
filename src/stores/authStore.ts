@@ -3,11 +3,19 @@ import { makeAutoObservable } from 'mobx'
 
 import {
   authByJwt,
+  checkPhoneNumber,
   loginByPhoneNumberFx,
   loginIntoCompany,
+  register,
   sendPhoneConfirmationCode,
 } from '@/shared/api'
-import { type CompanyDto, type UserDto } from '@/shared/api/models'
+import {
+  type AuthUserDto,
+  type CompanyDto,
+  ConfirmationStatus,
+  type CreateUserDto,
+  type UserDto,
+} from '@/shared/api/models'
 import { type RootStore } from '@/stores/rootStore.ts'
 
 export class AuthStore {
@@ -37,6 +45,12 @@ export class AuthStore {
     this.setDefaultBearerToken(res.payload.jwtToken)
   }
 
+  private readonly setAuth = (dto: AuthUserDto) => {
+    this.user = dto.user
+    this.company = dto.company
+    this.jwtToken = dto.jwtToken
+  }
+
   public readonly sendCodeToPhoneNumber = async (phoneNumber: string) => {
     await sendPhoneConfirmationCode(phoneNumber)
   }
@@ -51,9 +65,7 @@ export class AuthStore {
       return
     }
 
-    this.user = res.payload.user
-    this.company = res.payload.company
-    this.jwtToken = res.payload.jwtToken
+    this.setAuth(res.payload)
   }
 
   public readonly loginUserIntoCompany = async (companyId: number, userId: number) => {
@@ -63,24 +75,48 @@ export class AuthStore {
       return
     }
 
-    this.user = res.payload.user
-    this.company = res.payload.company
-    this.jwtToken = res.payload.jwtToken
+    this.setAuth(res.payload)
     this.setJwtTokenToLocalStorage(res.payload.jwtToken)
     this.setDefaultBearerToken(res.payload.jwtToken as string)
   }
 
+  public readonly checkPhoneNumber = async (
+    phoneNumber: string,
+    code: string,
+  ): Promise<boolean> => {
+    const res = await checkPhoneNumber(phoneNumber, code)
+    if (res.payload === null) {
+      return false
+    }
+
+    return res.payload === ConfirmationStatus.CONFIRMED
+  }
+
+  public readonly registerUser = async (dto: CreateUserDto) => {
+    const res = await register(dto)
+    if (res.payload === null) {
+      // eslint-disable-next-line no-useless-return
+      return
+    }
+
+    this.setAuth(res.payload)
+  }
+
   public readonly logout = () => {
-    this.user = null
-    this.company = null
-    this.jwtToken = null
+    this.setAuth({
+      user: null,
+      jwtToken: null,
+      company: null,
+      confirmationStatus: ConfirmationStatus.NOT_CONFIRMED,
+    })
     this.setJwtTokenToLocalStorage(null)
   }
 
   private readonly setDefaultBearerToken = (jwtToken: string) => {
     // eslint-disable-next-line prettier/prettier
-    axios.defaults.headers.common = { 'Authorization': `Bearer ${jwtToken}`
-  }
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${jwtToken}`,
+    }
   }
 
   private readonly getJwtToken = () => window.localStorage.getItem(this.JWT_TOKEN_PROP_NAME)

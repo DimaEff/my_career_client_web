@@ -19,7 +19,7 @@ export const authByJwt = async (jwtToken: string) =>
   (
     await axios.get(LOGIN_BASE + '/auth_by_jwt', {
       // eslint-disable-next-line prettier/prettier
-      headers: { 'Authorization': `Bearer ${jwtToken}` },
+      headers: { Authorization: `Bearer ${jwtToken}` },
     })
   ).data
 
@@ -74,19 +74,35 @@ export const loginIntoCompany = async (
 ): Promise<ApiResponse<AuthUserDto>> =>
   (await axios.get(LOGIN_BASE + `/company/${companyId}`, { params: { userId } })).data
 
-export const checkPhoneNumberFx = createEffect(
-  async (phoneNumber: string, code: string): Promise<ApiResponse<ConfirmationStatus>> =>
-    (
-      await axios.get(REGISTER_BASE + '/check_phone_number', {
-        params: {
-          phoneNumber,
-          code,
-        },
-      })
-    ).data,
-)
+// export const checkPhoneNumberFx = createEffect(
+//   async (phoneNumber: string, code: string): Promise<ApiResponse<ConfirmationStatus>> =>
+//     (
+//       await axios.get(REGISTER_BASE + '/check_phone_number', {
+//         params: {
+//           phoneNumber,
+//           code,
+//         },
+//       })
+//     ).data,
+// )
 
-export const registerFx = createEffect(
-  async (dto: CreateUserDto): Promise<ApiResponse<AuthUserDto>> =>
-    (await axios.post(REGISTER_BASE, dto)).data,
-)
+export const checkPhoneNumber = async (
+  phoneNumber: string,
+  code: string,
+): Promise<ApiResponse<ConfirmationStatus>> =>
+  (
+    await axios.get(REGISTER_BASE + '/check_phone_number', {
+      params: {
+        phoneNumber,
+        code,
+      },
+    })
+  ).data
+
+// export const registerFx = createEffect(
+//   async (dto: CreateUserDto): Promise<ApiResponse<AuthUserDto>> =>
+//     (await axios.post(REGISTER_BASE, dto)).data,
+// )
+
+export const register = async (dto: CreateUserDto): Promise<ApiResponse<AuthUserDto>> =>
+  (await axios.post(REGISTER_BASE, dto)).data

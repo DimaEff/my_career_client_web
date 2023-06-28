@@ -8,7 +8,7 @@ const Home = () => {
     authStore: { company },
   } = useRootStore()
 
-  return <Box>{company?.title}</Box>
+  return <Box>{company?.title ?? 'home'}</Box>
 }
 
 export default observer(Home)
