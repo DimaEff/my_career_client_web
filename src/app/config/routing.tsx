@@ -1,6 +1,6 @@
 import { type RouteObject } from 'react-router-dom'
 
-import { Code, Companies, Home, Login, Redirect, Register, RegisterForm, Roles } from '@/pages'
+import { Code, Companies, Home, Login, Redirect, Register, RegisterForm, Roles, Tasks } from '@/pages'
 import { RootLayout } from '@/pages/RootLayout'
 import { PATHS } from '@/shared/paths.ts'
 
@@ -51,6 +51,10 @@ export const getRoutes = (isAuth: boolean, isAuthIntoCompany: boolean): RouteObj
       {
         path: PATHS.ROLES,
         element: isAuth ? <Roles /> : <Redirect />,
+      },
+      {
+        path: PATHS.TASKS,
+        element: isAuth ? <Tasks /> : <Redirect />,
       },
     ],
   },

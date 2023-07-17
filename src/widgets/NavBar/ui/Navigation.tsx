@@ -30,6 +30,10 @@ const navigationWithCompany: NavigationPath[] = [
     path: PATHS.ROLES,
     name: LOCALES.PATH_NAME.ROLES,
   },
+  {
+    path: PATHS.TASKS,
+    name: LOCALES.PATH_NAME.TASKS,
+  },
 ]
 
 const Navigation = () => {

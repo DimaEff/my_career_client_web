@@ -8,4 +8,5 @@ export const PATHS = {
   CONFIRMATION_CODE: (phoneNumber = ':phoneNumber') => `/confirmation_code/${phoneNumber}`,
   COMPANIES: '/companies',
   ROLES: '/roles',
+  TASKS: '/tasks',
 } as const
