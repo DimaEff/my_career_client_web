@@ -30,5 +30,8 @@
     "Companies": "Компании",
     "Roles": "Роли",
     "Tasks": "Задачи"
-  }
+  },
+  "AssignedTo": "Назначено на",
+  "NotAssignedTasks": "Не назначено",
+  "CreatedBy": "Создатель"
 }

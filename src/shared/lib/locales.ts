@@ -32,4 +32,7 @@ export const LOCALES = {
     ROLES: 'PathName.Roles',
     TASKS: 'PathName.Tasks',
   },
+  ASSIGNED_TO: 'AssignedTo',
+  NOT_ASSIGNED_TASKS: 'NotAssignedTasks',
+  CREATED_BY: 'CreatedBy',
 } as const
