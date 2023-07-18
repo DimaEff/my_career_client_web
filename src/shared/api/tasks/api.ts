@@ -7,6 +7,7 @@ import {
   type TaskDto,
   type UpdateTaskDto,
 } from '@/shared/api/tasks/model/dto.ts'
+import { type OptionalGetTasksFilters } from '@/shared/api/tasks/model/types.ts'
 
 const BASE_URL = getBase('tasks')
 
@@ -16,17 +17,8 @@ export const createTask = async (dto: CreateTaskDto) =>
 export const updateTask = async (dto: UpdateTaskDto) =>
   (await axios.put<ApiResponse<TaskDto>>(BASE_URL, dto)).data
 
-export const getCompaniesTasks = async () =>
-  (await axios.get<ApiResponse<TaskDto[]>>(BASE_URL)).data
-
 export const getTaskById = async (taskId: number) =>
   (await axios.get<ApiResponse<TaskDto>>(BASE_URL + `/${taskId}`)).data
 
-export const getTasksAssignedTo = async (userId: number) =>
-  (await axios.get<ApiResponse<TaskDto[]>>(BASE_URL + `/assigned/${userId}`)).data
-
-export const getNotAssignedTasks = async () =>
-  (await axios.get<ApiResponse<TaskDto[]>>(BASE_URL + '/not-assigned')).data
-
-export const getTasksCreatedBy = async (userId: number) =>
-  (await axios.get<ApiResponse<TaskDto[]>>(BASE_URL + `/created-by/${userId}`)).data
+export const getAll = async (filters: OptionalGetTasksFilters = {}) =>
+  (await axios.get<ApiResponse<TaskDto[]>>(BASE_URL, { params: filters })).data

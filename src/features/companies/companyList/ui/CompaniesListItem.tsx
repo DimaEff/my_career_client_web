@@ -28,6 +28,7 @@ const CompaniesListItem: FC<CompanyListItemProps> = ({ company }) => {
       onMouseLeave={() => setHovered(false)}
       sx={{
         width: '100%',
+        cursor: 'pointer',
       }}
     >
       <CardContent>

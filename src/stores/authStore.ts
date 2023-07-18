@@ -26,6 +26,8 @@ export class AuthStore {
 
   jwtToken: string | null = null
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this)
   }
